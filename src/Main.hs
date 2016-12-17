@@ -56,7 +56,7 @@ boardNew w h = Board tiles w h where
   tiles = flip fmap (V.fromList [0..(w*h)-1]) $
     \i -> let tx = i `mod` w
               ty = i `div` h
-           in Tile False tx ty 
+             in Tile False tx ty 
 
 randomBoard :: Int -> Int -> IO Board
 randomBoard w h = do 
