@@ -67,7 +67,7 @@ randomBoard w h = do
 
 
 boardTileWidth, boardTileHeight :: Int
-(boardTileWidth, boardTileHeight) = (1, 1)
+(boardTileWidth, boardTileHeight) = (4, 4)
 
 boardGetTile :: Board -> (Int, Int) -> Maybe Tile
 boardGetTile Board{..} (x, y) = boardTiles V.!? i where
@@ -120,10 +120,10 @@ updateGame c = do
   SDL.clear r 
   board <- gets gameBoard
   let nboard = updateBoard board
-      in do liftIO $ renderBoard c nboard
-            modify $ \s -> s { gameBoard = nboard }
+     in do liftIO $ renderBoard c nboard
+           modify $ \s -> s { gameBoard = nboard }
   SDL.present r
-  SDL.delay 50
+  SDL.delay 16 
 
 gameLoop :: Components -> StateT GameState IO ()
 gameLoop c = do
@@ -142,7 +142,7 @@ destroyGame c = do
   SDL.quit
 
 main = do
-  board <- randomBoard 800 800
+  board <- randomBoard 200 200 
   c <- initGame
   runStateT (gameLoop c) $ GameState board 
   destroyGame c
